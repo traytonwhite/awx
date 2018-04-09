@@ -133,10 +133,10 @@ export default ['i18n', function(i18n) {
                 ngDisabled: '!(notification_template.summary_fields.user_capabilities.edit || canAdd)'
             },
             channels: {
-                label: i18n._('Destination Channels'),
+                label: i18n._('Destination Channels (and optional thread)'),
                 type: 'textarea',
                 rows: 3,
-                awPopOver: i18n._('Enter one Slack channel per line. The pound symbol (#) is not required.'),
+                awPopOver: i18n._('Enter one Slack channel per line. The pound symbol (#) is not required.\nOptionally, include a thread timestamp to keep notifications managed. Enter this in comma-delimited format.\nE.g.:\n#test-channel,1482960137.003543'),
                 dataTitle: i18n._('Destination Channels'),
                 dataPlacement: 'right',
                 dataContainer: "body",
