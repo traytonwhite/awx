@@ -67,12 +67,22 @@ class SlackBackend(AWXBaseEmailBackend):
                 for r in m.recipients():
                     if r.startswith('#'):
                         r = r[1:]
-                    ret = connection.api_call("chat.postMessage",
-                                              channel=r,
+                    if ',' in r:
+                        rts = [x.strip() for x in r.split(',')]
+                        ret = connection.api_call("chat.postMessage",
+                                              channel=rts[0],
+                                              thread_ts=rts[1],
                                               attachments=[{
                                                   "color": self.color,
                                                   "text": m.subject
                                               }])
+                    else:
+                        ret = connection.api_call("chat.postMessage",
+                                                  channel=r,
+                                                  attachments=[{
+                                                      "color": self.color,
+                                                      "text": m.subject
+                                                  }])
                     logger.debug(ret)
                     if ret['ok']:
                         sent_messages += 1
